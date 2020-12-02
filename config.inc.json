@@ -1,0 +1,11 @@
+{
+    "redis": {
+        "enabled": false,
+        "host": "localhost",
+        "port": 6379,
+        "name": "Redis Name",
+        "password": "Redis Password"
+    },
+    "debug": true,
+    "token": "Discord Bot Token Here"
+}

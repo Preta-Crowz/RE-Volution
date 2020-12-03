@@ -2,12 +2,14 @@ import { Client, Message, ICacheAdapter } from 'https://deno.land/x/harmony@v0.9
 import { Args } from 'https://deno.land/std@0.77.0/flags/mod.ts';
 import { ICommand } from '../Base/command.ts';
 
-export class Ping implements ICommand {
+export class Kick implements ICommand {
   target = [
-    "ping",
-    "pong"
+    "kick",
+    "kill"
   ];
   async run(args:Args, client:Client, message:Message, cache:ICacheAdapter): Promise<any>{
-    message.channel.send(`Current Ping : ${client.ping}`);
+    message.channel.send(JSON.stringify(message.mentions.channels.map((v) => [v.id])))
+    // message.channel.send(JSON.stringify(message.mentions.map((v) => [typeof v])))
+    // message.channel.send(`Found user : ${target.tag} `);
   }
 }

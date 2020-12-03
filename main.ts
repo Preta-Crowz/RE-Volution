@@ -1,5 +1,5 @@
 import { Client, Message, Intents, DefaultCacheAdapter,
-  RedisCacheAdapter, ICacheAdapter } from 'https://deno.land/x/harmony@v0.9.0/mod.ts';
+  RedisCacheAdapter, ICacheAdapter } from 'https://deno.land/x/harmony@v0.9.1/mod.ts';
 import { Args } from 'https://deno.land/std@0.77.0/flags/mod.ts';
 
 import { Parse } from './Util/parser.ts';

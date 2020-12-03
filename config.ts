@@ -13,9 +13,9 @@ export let config:Config = {
   token: baseConfig.token,
   redisEnabled: baseConfig.redis.enabled,
   redis: {
-    hostname: baseConfig.redis.hostname,
+    hostname: baseConfig.redis.host,
     port: baseConfig.redis.port,
-    name: baseConfig.redis.username,
+    name: baseConfig.redis.name,
     password: baseConfig.redis.password
   },
   debug: baseConfig.debug

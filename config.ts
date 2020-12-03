@@ -3,10 +3,10 @@ import { RedisConnectOptions } from 'https://denopkg.com/keroxp/deno-redis/mod.t
 const baseConfig = JSON.parse(Deno.readTextFileSync('./config.json'));
 
 type Config = {
-    readonly token: string,
-    readonly redisEnabled: boolean,
-    readonly redis: RedisConnectOptions,
-    readonly debug: boolean
+  readonly token: string,
+  readonly redisEnabled: boolean,
+  readonly redis: RedisConnectOptions,
+  readonly debug: boolean
 };
 
 export let config:Config = {

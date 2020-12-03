@@ -1,7 +1,9 @@
 import { Client, Message, Intents, DefaultCacheAdapter,
   RedisCacheAdapter, ICacheAdapter } from 'https://deno.land/x/harmony@v0.9.0/mod.ts';
-import { Parse } from './Util/parser.ts';
 import { Args } from 'https://deno.land/std@0.77.0/flags/mod.ts';
+
+import { Parse } from './Util/parser.ts';
+import { Commands } from './Processor/command.ts';
 
 import { config } from './config.ts';
 const client:Client = new Client();
@@ -22,9 +24,16 @@ client.on('messageCreate', async (msg: Message): Promise<void> => {
     parsed = Parse(msg.content);
     await CacheStorage.set('command', msg.content, parsed);
     client.debug('Preprocessor', `New command parsed : ${msg.content}`);
-    client.debug('Preprocessor', `Parsed to : ${JSON.stringify(parsed)}`);
   }
-  msg.channel.send(JSON.stringify(parsed));
+
+  let command:string = parsed._[0].toString().substr(2);
+  let execute = Commands.get(command);
+  if (execute !== undefined){
+    client.debug('Preprocessor', `Found command for : ${command}`)
+    execute.run(parsed, client, msg, CacheStorage);
+  } else {
+    client.debug('Preprocessor', `Unknown Command : ${command}`)
+  }
 });
 
 if (config.debug) client.on('debug', console.debug)

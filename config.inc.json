@@ -6,6 +6,6 @@
         "name": "Redis Name",
         "password": "Redis Password"
     },
-    "debug": true,
+    "debug": false,
     "token": "Discord Bot Token Here"
 }

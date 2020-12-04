@@ -1,5 +1,4 @@
-import { Client, Message, ICacheAdapter } from 'https://raw.githubusercontent.com/harmony-org/harmony/main/mod.ts';
-import { Args } from 'https://deno.land/std@0.79.0/flags/mod.ts';
+import { Client, Message, ICacheAdapter, Args } from '../deps.ts';
 
 export interface ICommand {
   target: string[];

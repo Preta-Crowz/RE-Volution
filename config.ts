@@ -1,4 +1,4 @@
-import { RedisConnectOptions } from 'https://denopkg.com/keroxp/deno-redis/mod.ts';
+import { RedisConnectOptions } from './deps.ts';
 
 const baseConfig = JSON.parse(Deno.readTextFileSync('./config.json'));
 

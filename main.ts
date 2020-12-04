@@ -36,6 +36,9 @@ client.on('messageCreate', async (msg: Message): Promise<void> => {
   }
 });
 
-if (config.debug) client.on('debug', console.debug)
+if (config.debug) client.on('debug', (message) => {
+  console.debug(message)
+  Deno.writeTextFile('./Data/debug.log', '\n'+message, {"append": true});
+});
 
 client.connect(config.token, Intents.All);

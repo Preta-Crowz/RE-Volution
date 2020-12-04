@@ -14,20 +14,19 @@ export class Ban implements ICommand {
     let idList:string[] = [...message.mentions.users].map((v) => v[0]);
     let members:Member[] = [];
     for(let id of idList){
-        let m = await message.guild.members.get(id);
-        if (m === undefined) continue;
-        members.push(m);
+      let m = await message.guild.members.get(id);
+      if (m === undefined) continue;
+      members.push(m);
     }
     let count:number = 0;
     for(let curr of members){
-        try{
-            await curr.ban(reason, del??undefined);
-            count++;
-        } catch(e) {
-            console.log(e);
-        }
+      try{
+        await curr.ban(reason, del??undefined);
+        count++;
+      } catch(e) {
+        console.log(e);
+      }
     }
-    message.channel.send(`Banned members : ${count} / ${members.length}
-Reason : ${reason}`)
+    message.channel.send(`Banned members : ${count} / ${members.length}`)
   }
 }

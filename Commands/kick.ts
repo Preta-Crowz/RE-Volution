@@ -1,4 +1,4 @@
-import { Client, Message, ICacheAdapter } from 'https://deno.land/x/harmony@v0.9.1/mod.ts';
+import { Client, Message, ICacheAdapter, Member } from '../../harmony/mod.ts';
 import { Args } from 'https://deno.land/std@0.77.0/flags/mod.ts';
 import { ICommand } from '../Base/command.ts';
 
@@ -8,8 +8,23 @@ export class Kick implements ICommand {
     "kill"
   ];
   async run(args:Args, client:Client, message:Message, cache:ICacheAdapter): Promise<any>{
-    message.channel.send(JSON.stringify(message.mentions.channels.map((v) => [v.id])))
-    // message.channel.send(JSON.stringify(message.mentions.map((v) => [typeof v])))
-    // message.channel.send(`Found user : ${target.tag} `);
+    if (message.guild === undefined) return;
+    let idList:string[] = [...message.mentions.users].map((v) => v[0]);
+    let members:Member[] = [];
+    for(let id of idList){
+        let m = await message.guild.members.get(id);
+        if (m === undefined) continue;
+        members.push(m);
+    }
+    let count:number = 0;
+    for(let curr of members){
+        try{
+            await curr.kick();
+            count++;
+        } catch(e) {
+            continue;
+        }
+    }
+    message.channel.send(`Kicked members : ${count} / ${members.length}`)
   }
 }

@@ -1,8 +1,8 @@
 import { Client, Message, Intents, DefaultCacheAdapter,
   RedisCacheAdapter, ICacheAdapter } from 'https://raw.githubusercontent.com/harmony-org/harmony/main/mod.ts';
-import { Args } from 'https://deno.land/std@0.77.0/flags/mod.ts';
+import { Args } from 'https://deno.land/std@0.79.0/flags/mod.ts';
 
-import { Parse } from './Util/parser.ts';
+import { parse } from 'https://deno.land/x/mutil@0.1.1/mod.ts';
 import { Commands } from './Processor/command.ts';
 
 import { config } from './config.ts';
@@ -21,7 +21,7 @@ client.on('messageCreate', async (msg: Message): Promise<void> => {
   if (msg.content.substr(0,2) !== "p!" || msg.author.bot) return;
   let parsed:Args = await CacheStorage.get('command', msg.content);
   if (parsed === undefined) {
-    parsed = Parse(msg.content);
+    parsed = parse(msg.content);
     await CacheStorage.set('command', msg.content, parsed);
     client.debug('Preprocessor', `New command parsed : ${msg.content}`);
   }

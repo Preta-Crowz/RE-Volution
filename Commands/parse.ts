@@ -2,12 +2,11 @@ import { Client, Message, ICacheAdapter } from 'https://raw.githubusercontent.co
 import { Args } from 'https://deno.land/std@0.79.0/flags/mod.ts';
 import { ICommand } from '../Base/command.ts';
 
-export class WhoAmI implements ICommand {
+export class Parse implements ICommand {
   target = [
-    "whoami",
-    "who"
+    "parse"
   ];
   async run(args:Args, client:Client, message:Message, cache:ICacheAdapter): Promise<any>{
-    message.channel.send(`Your tag is : \`${message.author.tag}\``);
+    message.channel.send(`Parsed args : ${JSON.stringify(args)}`);
   }
 }

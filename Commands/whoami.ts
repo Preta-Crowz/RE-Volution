@@ -6,6 +6,7 @@ export class WhoAmI implements ICommand {
     "whoami",
     "who"
   ];
+  args = {};
   async run(args:Args, client:Client, message:Message, cache:ICacheAdapter): Promise<any>{
     message.channel.send(`Your tag is : \`${message.author.tag}\``);
   }

@@ -6,6 +6,7 @@ export class Ping implements ICommand {
     "ping",
     "pong"
   ];
+  args = {};
   async run(args:Args, client:Client, message:Message, cache:ICacheAdapter): Promise<any>{
     message.channel.send(`Current Ping : ${client.ping}`);
   }

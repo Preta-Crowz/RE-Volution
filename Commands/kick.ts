@@ -6,6 +6,7 @@ export class Kick implements ICommand {
     "kick",
     "kill"
   ];
+  args = {};
   async run(args:Args, client:Client, message:Message, cache:ICacheAdapter): Promise<any>{
     if (message.guild === undefined) return;
     let idList:string[] = [...message.mentions.users].map((v) => v[0]);

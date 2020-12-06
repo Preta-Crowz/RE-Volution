@@ -6,6 +6,7 @@ export class GetId implements ICommand {
     "id",
     "top"
   ];
+  args = {};
   async run(args:Args, client:Client, message:Message, cache:ICacheAdapter): Promise<any>{
     message.channel.send(`User Mentions : ${JSON.stringify(message.mentions.users.map((v) => v.id))}
 Channel Mentions : ${JSON.stringify(message.mentions.channels.map((v) => v.id))}

@@ -1,5 +1,5 @@
 import { Client, Message, Intents, DefaultCacheAdapter,
-  RedisCacheAdapter, ICacheAdapter, Args, parse } from './deps.ts';
+  RedisCacheAdapter, ICacheAdapter, Args, parse, reAlias } from './deps.ts';
 import { Commands } from './Processor/command.ts';
 
 import { config } from './config.ts';
@@ -27,7 +27,8 @@ client.on('messageCreate', async (msg: Message): Promise<void> => {
   let execute = Commands.get(command);
   if (execute !== undefined){
     client.debug('Preprocessor', `Found command for : ${command}`)
-    execute.run(parsed, client, msg, CacheStorage);
+    let args:Args = reAlias(parsed, execute.args)
+    execute.run(args, client, msg, CacheStorage);
   } else {
     client.debug('Preprocessor', `Unknown Command : ${command}`)
   }
